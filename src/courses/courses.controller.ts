@@ -1,8 +1,11 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Res } from '@nestjs/common';
+import { CourseService } from './courses.service';
 
 
 @Controller('courses')
 export class CoursesController {
+
+    constructor(private readonly coourserService: CourseService) {}
 
 
     // @Get()
