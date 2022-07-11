@@ -1,4 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { response } from 'express';
 import { Course } from './entities/course.entity';
 
 @Injectable()
@@ -12,26 +13,30 @@ export class CourseService {
         }
     ];
 
-    findAll(){
+    findAll() {
         return this.courses;
     }
 
-    findOne(id: string){
-        return this.courses.find((course: Course) => course.id === Number(id));
+    findOne(id: string) {
+        const course = this.courses.find((course: Course) => course.id === Number(id));
+
+        if (!course) {
+            throw new HttpException(`Curso não encontrado`, HttpStatus.NOT_FOUND)
+        }
     }
 
-    create(createCourseDto: any){
+    create(createCourseDto: any) {
         this.courses.push(createCourseDto);
     }
 
-    update(id: string, updateCourseDto: any ) {
-         const indexCourse = this.courses.findIndex((course: Course) => course.id === Number(id));
-         this.courses[indexCourse] = updateCourseDto;
+    update(id: string, updateCourseDto: any) {
+        const indexCourse = this.courses.findIndex((course: Course) => course.id === Number(id));
+        this.courses[indexCourse] = updateCourseDto;
     }
 
-    remove(id: string){
+    remove(id: string) {
         const indexCourse = this.courses.findIndex((course: Course) => course.id === Number(id));
-        if(indexCourse >= 0) {
+        if (indexCourse >= 0) {
             this.courses.splice(indexCourse, 1)
         }
     }
