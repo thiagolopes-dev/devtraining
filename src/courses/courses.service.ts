@@ -1,7 +1,6 @@
 import { CreateCourseDto } from './dto/create-course.dto';
-import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { response } from 'express';
 import { Repository } from 'typeorm';
 import { Course } from './entities/course.entity';
 import { UpdateCourseDto } from './dto/update-course.dto';
@@ -18,8 +17,9 @@ export class CourseService {
         return this.courseRepository.find();
     }
 
-    findOne(id: any) {
-        const course = this.courseRepository.findOne(id);
+
+    findOne(id: number) {
+        const course = this.courseRepository.findOneBy({id});
         if (!course) {
             throw new NotFoundException(`Curso ${id} não encontrado`);
         }
@@ -42,8 +42,8 @@ export class CourseService {
         return this.courseRepository.save(course);
     }
 
-    async remove(id: any) {
-        const course = await this.courseRepository.findOne(id);
+    async remove(id: number) {
+        const course = await this.courseRepository.findOneBy({id});
         if (!course) {
             throw new NotFoundException(`Curso ${id} não encontrado`);
         }
