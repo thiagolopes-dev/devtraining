@@ -14,7 +14,7 @@ import { DatabaseModule } from './database/database.module';
       port: 5432,
       username: 'postgres',
       password: 'docker',
-      database: 'devtraining',
+      database: 'cursonestjs',
       autoLoadEntities: true,
       synchronize: false,
     }),
