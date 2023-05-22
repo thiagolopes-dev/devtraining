@@ -24,15 +24,29 @@ services:
     environment:
       - POSTGRES_PASSWORD=docker
       - POSTGRES_DB=cursonestjs
-
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: cursonestjs-pgadmin
+  
+  dbtest:
+    build: .docker/postgres
+    container_name: cursonestjs-dbtest
+    restart: always
     tty: true
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
-      - PGADMIN_DEFAULT_PASSWORD=admin
     ports:
-      - "8000:80"
-    depends_on:
-      - db
+      - "5433:5432"
+    volumes:
+      - .docker/dbdatatest:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=testdb
+
+
+#  pgadmin:
+#    image: dpage/pgadmin4
+#    container_name: cursonestjs-pgadmin
+#    tty: true
+#    environment:
+#      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+#      - PGADMIN_DEFAULT_PASSWORD=admin
+#    ports:
+#      - "8000:80"
+#    depends_on:
+#      - db
