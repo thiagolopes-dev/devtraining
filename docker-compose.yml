@@ -4,7 +4,7 @@ services:
   app:
     build: .
     entrypoint: .docker/entrypoint.sh
-    container_name: cursonestjs-app
+    container_name: cursonestjs-api
     ports:
       - "3001:3000"
     volumes:
