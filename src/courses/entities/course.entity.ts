@@ -14,9 +14,9 @@ export class Course {
     @Column()
     description: string;
 
-    @ManyToMany(() => Tag, (tag) => tag.courses, {
-        cascade: true,
-    })
     @JoinTable()
-    tags: string[];
+  @ManyToMany(() => Tag, (tag) => tag.courses, {
+    cascade: true,
+  })
+  tags: Tag[];
 }
