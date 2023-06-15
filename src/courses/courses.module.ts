@@ -2,7 +2,7 @@ import { Tag } from './entities/tag.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
 import { CoursesController } from './courses.controller';
-import { CourseService } from './courses.service';
+import { CoursesService } from './courses.service';
 import { Course } from './entities/course.entity';
 
 @Module({
@@ -12,7 +12,7 @@ import { Course } from './entities/course.entity';
         CoursesController
     ],
     providers: [
-        CourseService
+        CoursesService
     ]
 })
 export class CoursesModule {}

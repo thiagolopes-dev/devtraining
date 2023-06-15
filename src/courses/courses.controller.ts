@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Res } from '@nestjs/common';
-import { CourseService } from './courses.service';
+import { CoursesService } from './courses.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 
@@ -7,7 +7,7 @@ import { UpdateCourseDto } from './dto/update-course.dto';
 @Controller('courses')
 export class CoursesController {
 
-    constructor(private readonly coursesService: CourseService) {}
+    constructor(private readonly coursesService: CoursesService) {}
 
     @Get()
     findAll() {
