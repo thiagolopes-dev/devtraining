@@ -7,7 +7,7 @@ import { Course } from './entities/course.entity';
 import { UpdateCourseDto } from './dto/update-course.dto';
 
 @Injectable()
-export class CourseService {
+export class CoursesService {
 
     constructor(
         @InjectRepository(Course)
