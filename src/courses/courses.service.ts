@@ -24,17 +24,28 @@ export class CoursesService {
       }
 
 
+      // findOne(id: string) {
+      //   const course = this.courseRepository.findOne(id, {
+      //     relations: ['tags'],
+      //   });
+      //   if (!course) {
+      //     throw new NotFoundException(`Course ID ${id} not found`);
+      //   }
+      //   return course;
+      // }
+
       findOne(id: string) {
-        const course = this.courseRepository.findOne(id, {
-          relations: ['tags'],
+        const course = this.courseRepository.findOne({
+          where: { id },
+          relations: ['tags'],  
         });
-    
         if (!course) {
-          throw new NotFoundException(`Course ID ${id} not found`);
-        }
-    
-        return course;
+              throw new NotFoundException(`Course ID ${id} not found`);
+            }
+            return course;
+        // Resto do seu código...
       }
+      
 
     async create(createCourseDto: CreateCourseDto) {
         const tags = await Promise.all(
@@ -68,19 +79,39 @@ export class CoursesService {
         return this.courseRepository.save(course);
       }
 
+    // async remove(id: string) {
+    //     const course = await this.courseRepository.findOne(id);
+    //     if (!course) {
+    //         throw new NotFoundException(`Curso ${id} não encontrado`);
+    //     }
+    //     return this.courseRepository.remove(course);
+    // }
+
     async remove(id: string) {
-        const course = await this.courseRepository.findOne(id);
-        if (!course) {
-            throw new NotFoundException(`Curso ${id} não encontrado`);
-        }
-        return this.courseRepository.remove(course);
+      const course = await this.courseRepository.findOne({
+        where: { id },
+      });
+      if (!course) {
+        throw new NotFoundException(`Curso ${id} não encontrado`);
+      }
+      return this.courseRepository.remove(course);
     }
+    
+
+    // private async preloadTagByName(name: string): Promise<Tag> {
+    //     const tag = await this.tagRepository.findOne({ name });
+    //     if (tag) {
+    //       return tag;
+    //     }
+    //     return this.tagRepository.create({ name });
+    //   }
 
     private async preloadTagByName(name: string): Promise<Tag> {
-        const tag = await this.tagRepository.findOne({ name });
-        if (tag) {
-          return tag;
-        }
-        return this.tagRepository.create({ name });
+      const tag = await this.tagRepository.findOne({ where: { name } });
+      if (tag) {
+        return tag;
       }
+      return this.tagRepository.create({ name });
+    }
+    
 }
