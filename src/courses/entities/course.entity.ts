@@ -6,7 +6,7 @@ import {Tag} from "./tag.entity";
 export class Course {
 
     @PrimaryGeneratedColumn('uuid')
-    id: string;
+    id: number;
 
     @Column()
     name: string;
