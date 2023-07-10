@@ -16,7 +16,7 @@ export class CoursesController {
 
     @Get(':id')
     getByID(@Param('id') id: string) {
-        return  this.coursesService.findOne(id);
+        return  this.coursesService.findOne(+id);
     }
     @Post()
     create(@Body() createCourseDto: CreateCourseDto) {
@@ -24,11 +24,11 @@ export class CoursesController {
     }
     @Patch(':id')
     update(@Param('id') id: string, @Body() updateCourseDto: UpdateCourseDto) {
-        return this.coursesService.update(id, updateCourseDto);
+        return this.coursesService.update(+id, updateCourseDto);
     }
     @Delete(':id')
     remove(@Param('id') id: string, @Body() body){
-        return this.coursesService.remove(id);
+        return this.coursesService.remove(+id);
     }
 
 }

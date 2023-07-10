@@ -9,10 +9,10 @@ import { UpdateCourseDto } from './dto/update-course.dto';
 export class CoursesService {
 
   constructor(
-    @Inject(Course)
+    @Inject('COURSES_REPOSITORY')
     private readonly courseRepository: Repository<Course>,
 
-    @Inject(Tag)
+    @Inject('TAGS_REPOSITORY')
     private readonly tagRepository: Repository<Tag>
   ) { }
 
